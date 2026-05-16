@@ -1,0 +1,29 @@
+services:
+
+  postgres:
+    image: postgres:16
+    container_name: postgres
+    environment:
+      POSTGRES_USER: alldatasys
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: monitoring
+    ports:
+      - "5432:5432"
+
+  redis:
+    image: redis:7
+    container_name: redis
+    ports:
+      - "6379:6379"
+
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    ports:
+      - "3000:3000"
+
+  api:
+    build: ./api
+    container_name: fastapi
+    ports:
+      - "8000:8000"
